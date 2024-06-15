@@ -24,6 +24,19 @@
 **`pthread_mutex_unlock`**
 > int pthread_mutex_unlock(pthread_mutex_t *mutex);
 
+### Other unknown functions 
+> int gettimeofday(struct timeval *restrict tv, struct timezone *_Nullable restrict tz);
+>
+> struct timeval {
+               time_t      tv_sec;     /* seconds */
+               suseconds_t tv_usec;    /* microseconds */
+           };
+>
+> struct timezone {
+               int tz_minuteswest;     /* minutes west of Greenwich */
+               int tz_dsttime;         /* type of DST correction */
+           };
+
 
 ## TO-DO List
 - [X] learn how new functions for threads and thread lock work
