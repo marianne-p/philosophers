@@ -42,9 +42,9 @@
 > int usleep(useconds_t usec);
 
 ## Sources
-[POSIX thread (pthread) libraries](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)
-[Dining Philosophers Problem (Wiki)](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
-[Multithreading in C (GeeksforGeeks)](https://www.geeksforgeeks.org/multithreading-in-c/)
+- [POSIX thread (pthread) libraries](https://www.cs.cmu.edu/afs/cs/academic/class/15492-f07/www/pthreads.html)
+- [Dining Philosophers Problem (Wiki)](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- [Multithreading in C (GeeksforGeeks)](https://www.geeksforgeeks.org/multithreading-in-c/)
 
 ## TO-DO List
 - [X] learn how new functions for threads and thread lock work
