@@ -25,6 +25,7 @@
 > int pthread_mutex_unlock(pthread_mutex_t *mutex);
 
 ### Other unknown functions 
+**` gettimeofday`**
 > int gettimeofday(struct timeval *restrict tv, struct timezone *_Nullable restrict tz);
 >
 > struct timeval {
@@ -37,6 +38,8 @@
                int tz_dsttime;         /* type of DST correction */
            };
 
+**`usleep`** - stop thread execution of the thread for min `usec` *microseconds*, 0 on success, -1 on err.
+> int usleep(useconds_t usec);
 
 ## TO-DO List
 - [X] learn how new functions for threads and thread lock work
