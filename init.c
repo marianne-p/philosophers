@@ -40,6 +40,6 @@ void	init(t_table *table, int i)
 		(table->philos)[i]->right_fork = i;
 		if (i == 0)
 			(table->philos)[i]->right_fork = table->philo_nbr;
-		pthread_create((table->philos)[i]->thread_id, NULL, *start_simulation, (void *)table);
+		pthread_create((table->philos)[i]->thread_id, NULL, *simulation, (void *)(table->philos)[i]);
 	}
 }
