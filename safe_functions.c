@@ -1,4 +1,4 @@
-#include "philo.c"
+#include "philo.h"
 
 /*allocates, checks return, frees table on error */
 
@@ -19,7 +19,7 @@ void	safe_mutex_handle(pthread_mutex_t *mutex, t_opcode opcode)
 	else if (opcode == UNLOCK)
 		pthread_mutex_unlock(mutex);
 	else if (opcode == INIT)
-		pthread_mutex_init(mutexi, NULL);
+		pthread_mutex_init(mutex, NULL);
 	else if (opcode == DESTROY)
 		pthread_mutex_destroy(mutex);
 	else

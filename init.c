@@ -12,8 +12,34 @@
 
 #include "philo.h"
 
-void	init(t_table *table)
+/*
+*`void * (*start_routine)` pointer to function which takes `void *`
+*/
+
+void	init(t_table *table, int i)
 {
 	table->end_simulation = false;
-	table->philos = malloc();
+	table->philos = safe_malloc(table->philo_nbr * sizeof(t_philo));
+	table->forks = safe_malloc(table->philo_nbr * sizeof(t_fork));
+	while ((table->forks)[i])
+	{
+		//(table->forks)[i] = safe_malloc(sizeof())
+		(table->forks)[i]->fork_id = i + 1;
+		if (pthread_mutex_init((table->forks)[i++]->fork, NULL) != 0)
+			error_exit_free("Fork mutex init error\n", 1,table);
+		/*Error code above needs to be updated*/
+	}
+	i = 0;
+	while ((table->philos)[i])
+	{
+		(table->philos)[i]->id = i + 1;
+		(table->philos)[i]->meals_counter = 0;
+		(table->philos)[i]->full = false;
+		//(table->philos)[i]->last_meal_time = ?
+		(table->philos)[i]->left_fork = (i + 1) % table->philo_nbr;
+		(table->philos)[i]->right_fork = i;
+		if (i == 0)
+			(table->philos)[i]->right_fork = table->philo_nbr;
+		pthread_create((table->philos)[i]->thread_id, NULL, *start_simulation, (void *)table);
+	}
 }

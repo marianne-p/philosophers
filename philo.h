@@ -20,9 +20,16 @@
 #include <limits.h>
 #include <stdbool.h>
 
+enum e_optcode {
+	LOCK = 1,
+	UNLOCK = 2,
+	INIT = 3,
+	DESTROY = 4
+} t_opcode;
+
 typedef struct s_fork
 {
-	pthread_mutex_t	fork;
+	pthread_mutex_t	*fork;
 	int				fork_id;
 }	t_fork;
 
@@ -45,8 +52,9 @@ typedef struct s_table
 	long	time_to_sleep;
 	long	nbr_limit_meals;
 	long	start_simulation;
-	t_fork	*forks;
-	t_philo	*philos;
+	long	end_simulation;
+	t_fork	**forks;
+	t_philo	**philos;
 }	t_table;
 
 /*libft.c*/
