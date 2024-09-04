@@ -1,27 +1,27 @@
 #include "philo.h"
 
-/*allocates, checks return, frees table on error */
+/*allocates, checks return, frees cafe on error */
 
-void	*safe_malloc(size_t bytes, t_table *table)
+void	*safe_malloc(size_t bytes, t_cafe *cafe)
 {
 	void	*ret;
 
 	ret = malloc(bytes);
 	if (ret == NULL)
-		error_exit_free("Malloc error\n", 1, table);
+		error_exit_free("Malloc error\n", 1, cafe);
 	return (ret);
 }
 
-void	handle_mtx_err(int status, t_opcode opcode, t_table *table)
+void	handle_mtx_err(int status, t_opcode opcode, t_cafe *cafe)
 {
 	if (status == 0)
 		return ;
 	if (status == EINVAL && (opcode == LOCK || opcode == UNLOCK))
-		error_exit_free("The mutex value is not valid\n", table);
+		error_exit_free("The mutex value is not valid\n", cafe);
 	else if (status == EINVAL && opcode == INIT)
-		error_exit_free("The attr value is invalid\n", 1, table);
+		error_exit_free("The attr value is invalid\n", 1, cafe);
 	else if (status == EDEADLK)
-		error_exit_free("A deadlock will occur if the thread is blocked waiting for mtx\n", 1, table);
+		error_exit_free("A deadlock will occur if the thread is blocked waiting for mtx\n", 1, cafe);
 	else if (status == EPERM)
 		error_exit_free("Current thread doesn't hold a lock on mutex\n");
 	else if (status == ENOMEM)
@@ -30,23 +30,23 @@ void	handle_mtx_err(int status, t_opcode opcode, t_table *table)
 		error_exit_free("Mutex is locked");
 }
 
-void	handle_thrd_err(int status, t_opcode opcode, t_table *table)
+void	handle_thrd_err(int status, t_opcode opcode, t_cafe *cafe)
 {
 	if (status == 0)
 		return ;
 	if (status == EAGAIN)
-		error_exit_free("No resources for extra thread\n", 1, table);
+		error_exit_free("No resources for extra thread\n", 1, cafe);
 	else if (status == EPERM)
-		error_exit_free("The caller doesn't have the permission\n", 1, table);
+		error_exit_free("The caller doesn't have the permission\n", 1, cafe);
 	else if (status == EINVAL && opcode == CREATE)
-		error_exit_free("The value of attr is invalid\n", 1, table);
+		error_exit_free("The value of attr is invalid\n", 1, cafe);
 	else if (status == EINVAL && (opcode == JOIN || opcode == DETACH))
-		error_exit_free("The value specified is not joinable\n", 1, table);
+		error_exit_free("The value specified is not joinable\n", 1, cafe);
 	else if (status == ESRCH)
 		error_exit_free("No thread couble be found corresponding to the one"
-		"specified by the given thread ID, thread", 1, table);
+		"specified by the given thread ID, thread", 1, cafe);
 	else if (status == EDEADLK)
-		error_exit_free("A deadlock was detected\n", 1, table);
+		error_exit_free("A deadlock was detected\n", 1, cafe);
 }
 
 /*

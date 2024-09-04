@@ -39,4 +39,5 @@ void	init(t_cafe *cafe, int i)
 			(cafe->philos)[i]->right_straw = cafe->philo_nbr;
 		pthread_create((cafe->philos)[i]->thread_id, NULL, *simulation, (void *)(cafe->philos)[i]);
 	}
+	cafe->print_mutex = safe_mutex_handle(NULL, INIT);
 }

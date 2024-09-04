@@ -21,7 +21,7 @@
 #include <stdbool.h>
 #include <errno.h>
 
-enum e_optcode {
+typedef enum e_optcode {
 	LOCK,
 	UNLOCK,
 	INIT,
@@ -51,15 +51,16 @@ typedef struct s_philo
 
 typedef struct s_cafe
 {
-	long	philo_nbr;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	nbr_limit_drinks;
-	long	start_simulation;
-	long	end_simulation;
-	t_straw	**straws;
-	t_philo	**philos;
+	long		philo_nbr;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		nbr_limit_drinks;
+	long		start_simulation;
+	long			end_simulation;
+	t_straw			**straws;
+	t_philo			**philos;
+	pthread_mutex_t	*print_mutex;
 }	t_cafe;
 
 /*libft.c*/
@@ -69,11 +70,14 @@ long long	ft_atoi(const char *nptr);
 /*main.c*/
 bool	check_is_int(int argc, char **argv, int i);
 void	error_exit(char *str, int r);
-void	parse_philo(int argc, char **argv, t_cafe *table);
+void	parse_philo(int argc, char **argv, t_cafe *cafe);
 
 /*safe functions*/
-void	*safe_malloc(size_t bytes, t_cafe *table);
-void	handle_mtx_err(int status, t_opcode opcode, t_cafe *table);
-void	handle_thrd_err(int status, t_opcode opcode, t_cafe *table);
+void	*safe_malloc(size_t bytes, t_cafe *cafe);
+void	handle_mtx_err(int status, t_opcode opcode, t_cafe *cafe);
+void	handle_thrd_err(int status, t_opcode opcode, t_cafe *cafe);
+
+/*init.c*/
+void	init(t_cafe *cafe, int i);
 
 #endif
