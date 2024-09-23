@@ -51,13 +51,13 @@ int	main(int argc, char **argv, char **envv)
 {
 	t_table	table;
 
-	table = NULL;
+	//table = (t_table)NULL;
 	if (argc != 5 && argc != 6)
 		error_exit("Wrong Argument Number\n", 1);
 	if (check_is_int(argc, argv, 1) != true)
 		error_exit("Arguments are not integers\n", 1);
 	parse_philo(argc, argv, &table);
-	init(&table);
+	init(&table, 0);
 	run_philo(&table);
 	clean(&table);
 	return (0);
