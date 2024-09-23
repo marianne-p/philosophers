@@ -14,6 +14,16 @@
 
 void	init(t_table *table)
 {
+	i = 0;
 	table->end_simulation = false;
-	table->philos = malloc();
+	table->philos = safe_malloc(sizeof(t_philo *) * table->philo_nbr, table);
+	table->forks = safe_malloc(sizeof(t_fork *) * table->philo_nbr, table);
+	while (i < table->philo_nbr)
+	{
+		table->philos[i]->id = i + 1;
+		table->philos[i]->meals_counter = 0;
+		table->philos[i]->full = false;
+		//table->philos[i]->last_meal_time = 
+		table->philos
+	}
 }
